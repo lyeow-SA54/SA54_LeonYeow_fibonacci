@@ -1,0 +1,21 @@
+package oracle.sa54.leon;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+
+@RestController
+@ResponseBody
+public class Controller {
+
+	@GetMapping("/fibonacci")
+	public List<String> inputValue(@RequestParam String element)
+	{
+		int inputElem = objectMapper.readvalue(element, int);
+	}
+}

@@ -1,0 +1,7 @@
+package oracle.sa54.leon;
+
+import java.util.Collection;
+
+public interface FibService {
+	Collection<String> fibonacciReturn(int element);
+}

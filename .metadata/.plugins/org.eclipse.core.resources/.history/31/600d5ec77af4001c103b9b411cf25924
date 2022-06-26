@@ -1,0 +1,3 @@
+FROM openjdk:11
+MAINTAINER Leon
+ENTRYPOINT ["java","-jar","app.jar"]

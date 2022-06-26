@@ -1,0 +1,9 @@
+package oracle.sa54.leon;
+
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+public class Controller {
+
+}

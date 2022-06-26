@@ -1,0 +1,45 @@
+package oracle.sa54.leon;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class FibServiceImpl implements FibService {
+	
+	static int n1=0,n2=1,n3=0; 
+	List<Integer> unsorted = new ArrayList<Integer>();
+	
+	@Override
+	public List<Integer> fibonacciReturn(int element)
+		{
+			if(element>0){  
+		         n3 = n1 + n2;  
+		         n1 = n2;  
+		         n2 = n3;  
+		         Integer i3 = n3;
+		         unsorted.add(i3); 
+		         fibonacciReturn(element-1);  
+		         }
+			return unsorted;
+	}
+	
+	@Override
+	public List<Integer> fibonacciReturnEntry(int element)
+	{
+		if (element>=1)
+		{
+			unsorted.add(0);
+			if(element>=2)
+			{
+				unsorted.add(1);
+			}
+			if(element>2)
+			{
+				unsorted.addAll(2, fibonacciReturn(element-2));
+			}
+		}
+		return unsorted;
+	}
+}

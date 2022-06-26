@@ -1,0 +1,32 @@
+package oracle.sa54.leon;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+@RestController
+@ResponseBody
+public class FibController {
+
+	@Autowired
+	private FibService fService;
+	
+	@GetMapping("/fibonacci")
+	public Map<String, Collection<String>> inputValue(@RequestParam String element) throws JsonMappingException, JsonProcessingException
+	{
+		ObjectMapper objectMapper = new ObjectMapper();
+		int inputElem = objectMapper.readValue(element, int.class);
+		return Collections.singletonMap("fibonacci", fService.fibonacciReturn(inputElem));
+	}
+}

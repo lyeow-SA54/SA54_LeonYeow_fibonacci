@@ -1,0 +1,68 @@
+package oracle.sa54.leon;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class FibServiceImpl implements FibService {
+	
+	static int n1=0,n2=1,n3=0; 
+	List<Long> unsorted;
+	
+	@Override
+	public List<Long> fibonacciReturn(int element2)
+		{
+			if(element2>0){  
+		         n3 = n1 + n2;  
+		         n1 = n2;  
+		         n2 = n3;  
+		         Long i3 = Long.valueOf(n3);
+		         unsorted.add(i3); 
+		         fibonacciReturn(element2-1);  
+		         }
+			return unsorted;
+	}
+	
+	@Override
+	public List<Long> fibonacciReturnEntry(int element)
+	{
+		if (element>=1)
+		{
+			unsorted.add(Long.valueOf(0));
+			if(element>=2)
+			{
+				unsorted.add(Long.valueOf(1));
+				if(element>2)
+				{
+					fibonacciReturn(element-2);
+				}
+			}
+		}
+		return unsorted;
+	}
+	
+	public List<Long> fibonacciReturnSorted(List<Long> fibList)
+	{
+		List<Long> evenSorted = new ArrayList<Long>();
+		List<Long> oddSorted = new ArrayList<Long>();
+		
+		
+		for (int i = fibList.size(); i-- > 0; ) {
+			if (fibList.get(i)%2==0)
+			{
+				evenSorted.add(fibList.get(i));
+			}
+			else
+			{
+				oddSorted.add(fibList.get(i));
+			}
+		}
+		List<Long> newList = Stream.concat(evenSorted.stream(), oddSorted.stream())
+				   .collect(Collectors.toList());
+		return newList;
+	}
+}

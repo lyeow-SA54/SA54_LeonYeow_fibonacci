@@ -1,0 +1,11 @@
+package oracle.sa54.leon;
+
+import java.util.List;
+
+public interface FibService {
+	List<Long> fibonacciReturn(int element, List<Long> unsorted);
+	
+	List<Long> fibonacciReturnEntry(int element);
+	
+	List<Long> fibonacciReturnSorted(List<Long> fibList);
+}

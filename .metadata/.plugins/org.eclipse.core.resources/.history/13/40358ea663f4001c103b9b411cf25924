@@ -1,0 +1,40 @@
+package oracle.sa54.leon;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+@RestController
+@ResponseBody
+public class FibController {
+
+	@Autowired
+	private FibService fService;
+	
+	@GetMapping("/fibonacci")
+	public Collection<Map<String, List<Long>>> inputValue(@RequestParam String elements) throws JsonMappingException, JsonProcessingException
+	{
+		ObjectMapper objectMapper = new ObjectMapper();
+		int inputElem = objectMapper.readValue(elements, int.class);
+		List<Long> unsortedList = fService.fibonacciReturnEntry(inputElem);
+		Map<String, List<Long>> unsorted = Collections.singletonMap("fibonacci", unsortedList);
+		Map<String, List<Long>> sorted = Collections.singletonMap("sorted", fService.fibonacciReturnSorted(unsortedList));
+		Collection<Map<String, List<Long>>> returnCollection = new ArrayList<Map<String, List<Long>>>();
+		returnCollection.add(unsorted);
+		returnCollection.add(sorted);
+		return returnCollection;
+	}
+}
